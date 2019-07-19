@@ -22,7 +22,8 @@ our $data;
     my $id2alpha3 = $Locale::Codes::Data{'language'}{'id2code'}{'alpha-3'};
 
     for my $id (keys %$id2names) {
-        push @$data, [$id, $id2alpha3->{$id}, $id2alpha2->{$id}, $id2names->{$id}[0]];
+        next unless $id2alpha3->{$id};
+        push @$data, [$id2alpha3->{$id}, $id2alpha2->{$id}, $id2names->{$id}[0]];
     }
 
     $data = [sort {$a->[0] cmp $b->[0]} @$data];
@@ -35,28 +36,22 @@ my $res = gen_read_table_func(
     table_spec => {
         summary => 'List of languages',
         fields => {
-            id => {
-                summary => 'Numeric ID',
-                schema => 'uint*',
-                pos => 0,
-                sortable => 1,
-            },
             alpha3 => {
                 summary => 'ISO 639 3-letter code',
                 schema => 'str*',
-                pos => 1,
+                pos => 0,
                 sortable => 1,
             },
             alpha2 => {
                 summary => 'ISO 639 2-letter code',
                 schema => 'str*',
-                pos => 2,
+                pos => 1,
                 sortable => 1,
             },
             en_name => {
                 summary => 'English name',
                 schema => 'str*',
-                pos => 3,
+                pos => 2,
                 sortable => 1,
             },
         },
