@@ -63,6 +63,18 @@ Source data is generated from `Locale::Codes::Language_Codes`. so make sure you
 have a relatively recent version of the module.
 
 _
+    extra_props => {
+        examples => [
+            {
+                args => {query=>'indonesian'},
+                test => 0,
+            },
+            {
+                args => {query=>'indonesian', detail=>1},
+                test => 0,
+            },
+        ],
+    },
 );
 die "Can't generate function: $res->[0] - $res->[1]" unless $res->[0] == 200;
 
